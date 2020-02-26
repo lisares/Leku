@@ -131,6 +131,11 @@ class LocationPickerActivity : AppCompatActivity(),
     private var locationInfoLayout: FrameLayout? = null
     private var progressBar: ProgressBar? = null
     private var listResult: ListView? = null
+                
+    public var btnMyLocation:FloatingActionButton? = null
+    public var btnAcceptLocation:FloatingActionButton? = null
+    public var btnSatellite:FloatingActionButton? = null
+                
     private var clearSearchButton: ImageView? = null
     private var searchOption: MenuItem? = null
 
@@ -320,17 +325,17 @@ class LocationPickerActivity : AppCompatActivity(),
         searchView?.addTextChangedListener(textWatcher)
     }
 
-    private fun setUpFloatingButtons() {
-        val btnMyLocation = findViewById<FloatingActionButton>(R.id.btnFloatingAction)
+    public fun setUpFloatingButtons() {
+        btnMyLocation = findViewById<FloatingActionButton>(R.id.btnFloatingAction)
         btnMyLocation.setOnClickListener {
             checkLocationPermission()
             geocoderPresenter?.getLastKnownLocation()
             track(TrackEvents.ON_LOCALIZED_ME)
         }
-        val btnAcceptLocation = findViewById<FloatingActionButton>(R.id.btnAccept)
+        btnAcceptLocation = findViewById<FloatingActionButton>(R.id.btnAccept)
         btnAcceptLocation.setOnClickListener { returnCurrentPosition() }
 
-        val btnSatellite = findViewById<FloatingActionButton>(R.id.btnSatellite)
+        btnSatellite = findViewById<FloatingActionButton>(R.id.btnSatellite)
         btnSatellite?.setOnClickListener {
             map?.let {
                 it.mapType = if (it.mapType == MAP_TYPE_SATELLITE) MAP_TYPE_NORMAL else MAP_TYPE_SATELLITE
